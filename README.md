@@ -21,6 +21,8 @@ python3 scripts/workflow_check.py --workflow all
 
 检查在临时数据根内生成4秒校准音画，不依赖外部素材或在线服务，完成18条工作流，包括真实强制终止及恢复。`--workflow`可选择运行清单中的某条工作流；所需的前置接收、版本编辑和渲染也会执行。初始化基线不含自动测试套件，testing为deferred；这里提供有界生产工作流核验，不声明测试命令。
 
+`scripts/timegrid_check.py`是时间职责的兼容性核验：以非整帧源区间、重复源与跨界字幕驱动真实MP4/WAV/VTT路径，输出规范化记录。对两个构建分别运行`--phase seed`并diff记录，可证明剪辑计划、字幕映射与编码参数的时间关系未漂移；`--phase resume`在既有数据根上验证恢复、重试与已提交成片核验。
+
 ## 调用顺序
 
 1. `POST /forge/v1/sources?name=校准片`：请求体为媒体原始字节，返回素材ID、SHA-256与流事实。

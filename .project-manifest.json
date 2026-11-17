@@ -33,6 +33,11 @@
       "path": "internal/media"
     },
     {
+      "id": "timebase",
+      "name": "编辑毫秒词汇与各消费边界换算",
+      "path": "internal/timebase"
+    },
+    {
       "id": "timeline",
       "name": "源区间与成片区间关系",
       "path": "internal/timeline"
@@ -75,6 +80,7 @@
         "application",
         "objects",
         "media",
+        "timebase",
         "domain",
         "journal"
       ],
@@ -132,6 +138,7 @@
       "module_ids": [
         "http",
         "application",
+        "timebase",
         "timeline",
         "captions",
         "domain",
@@ -153,6 +160,7 @@
       "module_ids": [
         "http",
         "application",
+        "timebase",
         "timeline",
         "captions",
         "domain"
@@ -233,6 +241,7 @@
       "module_ids": [
         "http",
         "application",
+        "timebase",
         "timeline",
         "captions",
         "encoding",
@@ -256,6 +265,7 @@
       "module_ids": [
         "http",
         "application",
+        "timebase",
         "timeline",
         "encoding",
         "inspection",
@@ -339,6 +349,7 @@
       "module_ids": [
         "http",
         "application",
+        "timebase",
         "inspection",
         "media",
         "objects",
@@ -445,7 +456,7 @@
     "evidence": {
       "concurrency": "internal/service/worker.go:claim, completeLocked",
       "recovery_rollback": "internal/journal/recovery.go:Recover",
-      "time_semantics": "internal/timeline/plan.go:Build; internal/caption/map.go:Map",
+      "time_semantics": "internal/timebase/timebase.go; internal/timeline/plan.go:Build; internal/caption/map.go:Map",
       "idempotency": "internal/service/submit.go:Submit",
       "snapshot_consistency": "internal/service/submit.go:Submit; internal/journal/store.go:Update"
     }

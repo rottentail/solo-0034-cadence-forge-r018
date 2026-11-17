@@ -1,9 +1,7 @@
 package service
 
 import (
-	"cadenceforge/internal/caption"
 	"cadenceforge/internal/domain"
-	"cadenceforge/internal/timeline"
 	"strings"
 	"time"
 )
@@ -62,11 +60,10 @@ func (s *Service) Submit(key string, request Request) (domain.Render, error) {
 		for _, c := range sheet.Cues {
 			sources[c.SourceID] = st.Sources[c.SourceID]
 		}
-		plan, err := timeline.Build(sheet, recipe, sources)
+		plan, err := compose(sheet, recipe, sources)
 		if err != nil {
 			return err
 		}
-		plan.VTT = caption.VTT(caption.Map(sheet, plan))
 		now := time.Now().UTC()
 		id := ID()
 		out = domain.Render{ID: id, Key: key, RequestHash: fingerprint, Sheet: sheet, Recipe: recipe, Sources: sources, Plan: plan, State: "queued", Attempts: []domain.Attempt{}, CreatedAt: now, UpdatedAt: now}

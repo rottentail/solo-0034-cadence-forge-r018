@@ -1,9 +1,7 @@
 package service
 
 import (
-	"cadenceforge/internal/caption"
 	"cadenceforge/internal/domain"
-	"cadenceforge/internal/timeline"
 	"time"
 )
 
@@ -53,10 +51,5 @@ func (s *Service) Preview(sheetID, recipeID string) (domain.Plan, error) {
 	}
 	sheet := sheets[len(sheets)-1]
 	recipe := recipes[len(recipes)-1]
-	plan, err := timeline.Build(sheet, recipe, st.Sources)
-	if err != nil {
-		return plan, err
-	}
-	plan.VTT = caption.VTT(caption.Map(sheet, plan))
-	return plan, nil
+	return compose(sheet, recipe, st.Sources)
 }

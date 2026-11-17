@@ -2,6 +2,7 @@ package media
 
 import (
 	"cadenceforge/internal/domain"
+	"cadenceforge/internal/timebase"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -73,6 +74,6 @@ func (p Prober) Probe(ctx context.Context, path string) (domain.Media, error) {
 	if m.Audio && (m.Channels < 1 || m.Channels > 8 || m.SampleRate < 8000 || m.SampleRate > 192000) {
 		return m, fmt.Errorf("unsupported audio layout")
 	}
-	m.DurationMS = int64(math.Round(duration * 1000))
+	m.DurationMS = timebase.Milliseconds(duration)
 	return m, nil
 }
